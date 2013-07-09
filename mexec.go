@@ -39,8 +39,13 @@ func main() {
 		jobFilename, numWorkers, exitOnError)
 
 	// Compute the job list
-	jobFile, _ := os.Open(jobFilename)
-	jobReader := bufio.NewReader(jobFile)
+	var jobReader *bufio.Reader
+	if jobFilename == "-" {
+		jobReader = bufio.NewReader(os.Stdin)
+	} else {
+		jobFile, _ := os.Open(jobFilename)
+		jobReader = bufio.NewReader(jobFile)
+	} 
 	jobs := getJobs(jobReader)
 	fmt.Printf("%d jobs will be submitted for execution\n\n", len(jobs))
 
