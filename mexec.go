@@ -20,11 +20,11 @@ type Job struct {
 
 func main() {
 	if len(os.Args) != 3 {
-		fmt.Printf("Usage: %s jobfile numWorkers\n")
+		fmt.Printf("Usage: %s jobFile|- numWorkers\n", os.Args[0])
 		os.Exit(1)
 	}
 
-	jobFilename := os.Args[1] // The file containing the commands to execute
+	jobFilename := os.Args[1]
 	numWorkers := func(arg string)(ret int){ 
 		r, err := strconv.ParseInt(arg, 10, 64)
 		if err != nil {
